@@ -25,17 +25,17 @@ Operational concerns belong in the first slice: identity and permissions, cost v
 
 ## First self-service flow
 
-The first user journey is a guided application creation flow. It should ask for the project's name, an architecture preset, a technology stack, and optional supporting services. The preset is a recommendation based on expected usage and other relevant needs; users can adjust its suggested settings. The exact sizing inputs and preset rules remain to be validated.
+The first user journey is a guided application creation flow. It asks for the project's name and technology stack. Architecture is optional: the user can accept a recommended preset, adjust its suggested settings, or skip infrastructure setup and create only the application repository to configure later. The preset is a recommendation based on expected usage and other relevant needs; the exact sizing inputs and preset rules remain to be validated.
 
-Only supporting services are optional. The initial optional choices are a database, a cache, and observability. The application name, architecture preset, and stack are required. The selected stack determines the starter code and its documentation. The selected infrastructure and services determine the Terraform configuration. Tepu creates a repository containing the generated application, documentation, and infrastructure definitions.
+Supporting services are also optional. The initial choices are a database, a cache, and observability. The application name and stack are required. The selected stack determines the starter code and its documentation. If the user configures architecture, that choice and selected services determine the Terraform configuration. Tepu creates a repository containing the generated application, documentation, and, when infrastructure is selected, its Terraform definitions.
 
-The generated project should include only what the user selected. For example, if no database is selected, it should contain no database configuration, database-specific environment variables, or database dependency in the generated application. The same principle applies to cache and observability integrations.
+The generated project should include only what the user selected. For example, if no database is selected, it should contain no database configuration, database-specific environment variables, or database dependency in the generated application. The same principle applies to cache and observability integrations. If architecture is skipped, the repository should remain usable as an application template without infrastructure files or configuration that assumes provisioned resources.
 
-After generation and provisioning, Tepu presents the created repository and endpoint or access details when applicable. It also shows a lifecycle view of the stages, their current status, and useful links. When provisioning finishes, the user receives an in-system notification that links back to the application details.
+After generation and any requested provisioning, Tepu presents the created repository and endpoint or access details when applicable. It also shows a lifecycle view of the requested stages, their current status, and useful links. When the requested process finishes, the user receives an in-system notification that links back to the application details. A repository-only creation should complete without showing infrastructure provisioning as a failed or pending step.
 
 ## Provisioning failures
 
-The application lifecycle view is the primary place to understand and act on a failure. Each stage should show whether it is pending, running, successful, or failed. For a failed stage, Tepu should show a short explanation, the affected resource or operation, and the time of failure. It should provide relevant logs or diagnostic details and a clear next action, such as retrying a safe step or opening configuration guidance.
+The application lifecycle view is the primary place to understand and act on a failure. Each requested stage should show whether it is pending, running, successful, or failed. For a failed stage, Tepu should show a short explanation, the affected resource or operation, and the time of failure. It should provide relevant logs or diagnostic details and a clear next action, such as retrying a safe step or opening configuration guidance.
 
 Retries must not silently create duplicate resources. Tepu should preserve completed stages, identify the failed stage, and retry only when that operation can be repeated safely. If automatic recovery is not supported, the UI should explain what needs attention and provide a link to the relevant logs or repository configuration. Destructive cleanup or retry behavior should be explicit to the user.
 
@@ -59,10 +59,11 @@ Floci is the primary environment for initial experiments when it supports the op
 - Initial learning is local-first with Floci; real AWS validation is optional and later.
 - The long-term product goal is template-based application self-service.
 - The maintainer will implement the platform manually as part of the learning process.
-- The application creation flow asks for a name, an adjustable architecture recommendation, a stack, and optional supporting services.
+- The application creation flow requires a project name and stack.
+- Architecture is optional: users can choose an adjustable recommendation or create a repository-only template for later setup.
 - Optional supporting services initially include a database, cache, and observability.
-- Tepu generates infrastructure with Terraform, stack-specific code and documentation, and a repository for the generated project.
-- The UI shows lifecycle progress and sends an in-system notification when provisioning completes.
+- Tepu generates stack-specific code and documentation, Terraform when infrastructure is selected, and a repository for the generated project.
+- The UI shows progress for requested lifecycle stages and sends an in-system notification when the requested process completes.
 
 ### Hypotheses to validate
 
@@ -75,6 +76,7 @@ Floci is the primary environment for initial experiments when it supports the op
 
 - Which application template and AWS execution option should form the first complete workflow?
 - Which inputs should determine the adjustable architecture recommendation?
+- Which supporting services should be configurable independently, and what dependencies do they impose?
 - Which resources should Tepu provision, and which should be prerequisites managed outside the platform?
 - What should be the ownership model for Terraform state and, if real AWS is used later, its accounts and credentials?
 - Which lifecycle actions should the first version expose beyond creation, deployment, and cleanup?

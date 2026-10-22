@@ -10,6 +10,7 @@ Use a dedicated local CLI profile or shell session with **dummy credentials**, a
 
 ## Stage 1: Local toolchain and endpoint safety
 
+- **Status:** Done (10/21/2026), tested with Floci v2.3.0
 - **Learn:** Install and start Floci; install AWS CLI and Terraform; understand Docker, CLI profiles, regions, dummy credentials, and endpoints.
 - **Exercise:** Follow Floci's [installation](https://floci.io/floci/getting-started/installation/) and quick start. Make a read-only AWS CLI request to Floci. Initialize a Terraform configuration with local service endpoints, without applying resources.
 - **Complete when:** Floci responds, the CLI request uses dummy credentials and its local endpoint, Terraform initializes, and you can explain how to prevent a local command from targeting AWS.

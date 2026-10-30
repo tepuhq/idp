@@ -18,6 +18,7 @@ Use a dedicated local CLI profile or shell session with **dummy credentials**, a
 
 ## Stage 2: Manual resources with AWS CLI
 
+- **Status:** Done (10/30/2026), tested with Floci v2.3.0
 - **Learn:** Create, inspect, use, and delete resources individually. Start with S3 objects and an SQS queue; the required operations are documented by Floci for [S3](https://floci.io/floci/services/s3/) and [SQS](https://floci.io/floci/services/sqs/).
 - **Exercise:** Create a bucket, upload and retrieve an object; create a queue, send and receive a message; inspect both resources. Record dependencies and cleanup order. The two resources are independent in this lab.
 - **Complete when:** You can reproduce the operations from notes, verify the object content and received message, and identify which commands change state.

@@ -1,10 +1,16 @@
-# Tepu
+# Tepu IDP
 
-Tepu is an open-source Internal Developer Platform (IDP) project for learning and demonstrating Cloud Computing, DevOps, and Platform Engineering. Its long-term goal is to let developers create, provision, deploy, and manage applications through templates and a self-service workflow.
+**Self-service infrastructure and application management for developers.**
+
+Tepu IDP is an open-source Internal Developer Platform designed to simplify application provisioning, deployment, and infrastructure management through developer self-service.
+
+The project is part of the [Tepu](https://github.com/tepuhq) ecosystem and serves as its first developer tooling product.
 
 ## Project status
 
-Tepu is in its documentation and learning stage. The platform has not been implemented yet. The first experiments will run locally with Floci; validation on real AWS is optional and comes later.
+Tepu IDP is currently in its early development stage, focusing on cloud infrastructure, automation, and the foundations of its self-service platform.
+
+Initial experiments run locally with Floci, with optional validation on real AWS.
 
 ## Technical direction
 
@@ -13,7 +19,7 @@ Tepu is in its documentation and learning stage. The platform has not been imple
 - **Infrastructure:** AWS-compatible services and Terraform.
 - **Local environment:** Floci where its documented operations support the experiment.
 
-The first goal is to understand and document a small application lifecycle before automating it. Workers, Kubernetes, and a more distributed architecture remain decisions for a demonstrated need.
+The initial goal is to establish a complete application lifecycle before expanding into automated provisioning, deployments, infrastructure visibility, and management.
 
 ## Documentation
 
@@ -22,4 +28,4 @@ The first goal is to understand and document a small application lifecycle befor
 
 ## License
 
-Tepu is licensed under the [Apache License 2.0](LICENSE).
+Tepu IDP is licensed under the [Apache License 2.0](LICENSE).
